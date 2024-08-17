@@ -7,7 +7,7 @@
 <?php
 // データベース接続
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=fishing_record_db', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=', '', '');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die('Connection failed: ' . $e->getMessage());
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["image"]) && $_FILES["
 
     try {
         // 画像データをデータベースに挿入
-        $stmt = $pdo->prepare("INSERT INTO record (image, length, weight, lure, date) VALUES (:image, :length, :weight, :lure, :date)");
+        $stmt = $pdo->prepare("INSERT INTO dbname (image, length, weight, lure, date) VALUES (:image, :length, :weight, :lure, :date)");
         $stmt->bindValue(':image', $imageData, PDO::PARAM_LOB);
         $stmt->bindValue(':length', $length, PDO::PARAM_INT);
         $stmt->bindValue(':weight', $weight, PDO::PARAM_INT);
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id'])) {
     $delete_id = $_POST['delete_id'];
 
     try {
-        $stmt = $pdo->prepare("DELETE FROM record WHERE id = :id");
+        $stmt = $pdo->prepare("DELETE FROM dbname WHERE id = :id");
         $stmt->bindValue(':id', $delete_id, PDO::PARAM_INT);
         $stmt->execute();
 
@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id'])) {
 
 //データベースのデータを取得
 try {
-    $stmt = $pdo->query("SELECT * FROM record ORDER BY id DESC");
+    $stmt = $pdo->query("SELECT * FROM dbname ORDER BY id DESC");
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die('Error fetching records: ' . $e->getMessage());
