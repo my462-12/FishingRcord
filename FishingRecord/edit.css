@@ -1,0 +1,44 @@
+body{
+  text-align: center;
+}
+input[type='file'] {
+  color: rgb(31, 41, 55);
+  cursor: pointer;
+  border: 1px solid rgb(191, 194, 199);
+  border-radius: 0.375rem;
+  padding-right: 0.5rem;
+  width: 24rem;
+}
+
+::file-selector-button,
+::-webkit-file-upload-button {
+  background-color: rgb(209, 213, 219);
+  color: rgb(31, 41, 55);
+  border: none;
+  cursor: pointer;
+  border-right: 1px solid rgb(191, 194, 199);
+  padding: 0.25rem 1rem;
+  margin-right: 1rem;
+}
+
+input[name="date"],input[name="length"],input[name="weight"],input[name="lure"]{
+  width: 480px;
+  height: 25px;
+  border-radius:5px ;
+  border: 1px solid gray;
+}
+.formBtn{
+  width: 485px;
+  color: #fff;
+  background-color: rgb(168, 243, 243);
+  border: 1px solid gray;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+.formBtn:hover{
+  background-color: rgb(250, 207, 128);
+  transition: 0.5s;
+}
+li{
+  list-style: none;
+}
