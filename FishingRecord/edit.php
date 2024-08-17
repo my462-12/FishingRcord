@@ -1,7 +1,7 @@
 <?php
 // データベース接続
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=fishing_record_db', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=', '', '');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die('Connection failed: ' . $e->getMessage());
@@ -16,7 +16,7 @@ if (isset($_GET['edit_id'])) {
     $editId = $_GET['edit_id'];
 
     try {
-        $stmt = $pdo->prepare("SELECT * FROM record WHERE id = :id");
+        $stmt = $pdo->prepare("SELECT * FROM  WHERE id = :id");
         $stmt->bindValue(':id', $editId, PDO::PARAM_INT);
         $stmt->execute();
         $editData = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -38,10 +38,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($id) {
             // 編集処理
             if ($imageData) {
-                $stmt = $pdo->prepare("UPDATE record SET image = :image, length = :length, weight = :weight, lure = :lure, date = :date WHERE id = :id");
+                $stmt = $pdo->prepare("UPDATE dbname SET image = :image, length = :length, weight = :weight, lure = :lure, date = :date WHERE id = :id");
                 $stmt->bindValue(':image', $imageData, PDO::PARAM_LOB);
             } else {
-                $stmt = $pdo->prepare("UPDATE record SET length = :length, weight = :weight, lure = :lure, date = :date WHERE id = :id");
+                $stmt = $pdo->prepare("UPDATE dbname SET length = :length, weight = :weight, lure = :lure, date = :date WHERE id = :id");
             }
             $stmt->bindValue(':id', $id, PDO::PARAM_INT);
             $stmt->bindValue(':length', $length, PDO::PARAM_INT);
